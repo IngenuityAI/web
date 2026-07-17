@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { PromptBar } from "./client";
+import { API } from "@/classes/API";
 
 interface IPageProps {
   searchParams: Promise<{

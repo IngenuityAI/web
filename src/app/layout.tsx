@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Figtree, Outfit } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ConfigurationProvider } from "@/providers/ConfigurationProvider";
 
 const outfitHeading = Outfit({
   subsets: ["latin"],
@@ -31,7 +32,9 @@ export default function RootLayout({
         outfitHeading.variable,
       )}
     >
-      <body className="min-h-full flex flex-col dark">{children}</body>
+      <body className="min-h-full flex flex-col dark">
+        <ConfigurationProvider>{children}</ConfigurationProvider>
+      </body>
     </html>
   );
 }
