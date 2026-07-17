@@ -5,6 +5,7 @@ import {
   LucideAsterisk,
   LucideHome,
   LucideHouse,
+  LucideLogOut,
   LucideMessageSquare,
   LucideProps,
   LucideStar,
@@ -20,12 +21,13 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { signOut } from "next-auth/react";
 
 export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-20 h-full flex flex-col items-center relative">
+    <nav className="w-20 grow flex flex-col items-center relative justify-between py-2">
       <LucideAsterisk className="size-12" />
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2">
         <TabButton
@@ -39,6 +41,13 @@ export function Sidebar() {
           isActive={pathname.startsWith("/favorites")}
         />
       </div>
+      <Button
+        variant={"ghost"}
+        className={cn("size-12 rounded-sm")}
+        onClick={() => signOut({ callbackUrl: "/" })}
+      >
+        <LucideLogOut className="size-6" />
+      </Button>
     </nav>
   );
 }
