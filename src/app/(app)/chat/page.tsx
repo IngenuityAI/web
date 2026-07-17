@@ -11,7 +11,10 @@ interface IPageProps {
 export default async function Page(props: IPageProps) {
   const { q } = await props.searchParams;
 
-  // TODO: Create chat when q is provided
+  if (q) {
+    const chat = await API.chats.create(q);
+    redirect(`/chat/${chat.id}`);
+  }
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-8">

@@ -36,6 +36,7 @@ api.interceptors.request.use(
       // Add session token
       try {
         const { getSession } = await import("next-auth/react");
+
         const session = await getSession();
 
         if (session && "accessToken" in session && session.accessToken)
