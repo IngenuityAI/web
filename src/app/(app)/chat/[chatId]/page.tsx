@@ -5,7 +5,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { ChatWindow } from "./client";
+import { Chat } from "./client";
 
 interface IPageProps {
   params: Promise<{
@@ -26,7 +26,7 @@ export default async function Page(props: IPageProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ChatWindow chatId={chatId} />
+      <Chat chatId={chatId} />
     </HydrationBoundary>
   );
 }
