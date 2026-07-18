@@ -1,8 +1,11 @@
 import api from "@/lib/api";
+import { secios } from "secios";
 
 export enum ApiVersion {
   V1 = "1",
 }
+
+const seciosInstance = secios.create(api);
 
 export class ApiClient {
   public static async get<ResponseType>(
@@ -79,5 +82,13 @@ export class ApiClient {
       throw new Error(response.error?.data?.message || "Unknown error");
 
     return response.data;
+  }
+
+  public static async sse(version: ApiVersion, path: string) {
+    const es = await seciosInstance.connect(
+      `/v${version}${path.startsWith("/") ? path : `/${path}`}`,
+    );
+
+    return es;
   }
 }

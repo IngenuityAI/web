@@ -15,6 +15,16 @@ export const API = {
       }),
     id: (chatId: string) => ({
       get: () => ApiClient.get<Chat>(ApiVersion.V1, `/chats/${chatId}`),
+
+      messages: {
+        id: (messageId: string) => ({
+          stream: async () =>
+            await ApiClient.sse(
+              ApiVersion.V1,
+              `/chats/${chatId}/messages/${messageId}/stream`,
+            ),
+        }),
+      },
     }),
   },
 };
